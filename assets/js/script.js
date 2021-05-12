@@ -31,24 +31,53 @@ var questions = [
       answer: "console.log",
     },
   ];
-  
-  var questionEl = document.querySelector("#question");
-  var optionListEl = document.querySelector("#option-list");
-  var questionResultEl = document.querySelector("#question-result");
-  var timerEl = document.querySelector("#timer");
-  
+
   var questionIndex = 0;
   var correctCount = 0;
   
-  var time = 20;
+  var time = 7000;
+
   var intervalId;
+
+ 
+ 
+
+  // attempting to fix line 70s bug.
+  console.log(questions); // this looks like the array is populating fine.
+  console.log(questions[questionIndex].question); // this is working now by moving vars up above (qi,cc,t,ii)
   
+  var questionEl = document.querySelector("#question-title"); //spelled with "-title" in index, whoops. -title
+  var questionEl2 = document.querySelector("#questions");
+  var optionListEl = document.querySelector("#choices"); // 
+  var hideStart = document.querySelector("#startquiz"); // hide start
+  console.log(hideStart);
+  var questionResultEl = document.querySelector("#question-right-wrong"); ////BYYYYEE errors. We're error free right meow.
+  var timerEl = document.querySelector("#timer");
+  var startQuizBtn = document.querySelector("#start-quiz");
+  var StartTimerTxt = document.querySelector("#timerTxt");
+  var choices = questions[questionIndex].choices;
+  var choicesLenth = choices.length;
+  questionEl.textContent = questions[questionIndex].question;
+  console.log(questionEl.textContent);
+  optionListEl.innerHTML = "";
+  questionResultEl.innerHTML = "";
+
+
+  var startQuiz = function() {
+    time = 20;
+    hideStart.className = "hide";
+    questionEl2.className = "";
+    questionEl.innerHTML = questionEl.textContent
+    console.log(questionIndex);
+  };
+
   function endQuiz() {
     clearInterval(intervalId);
     var body = document.body;
     body.innerHTML = "Game over, You scored " + correctCount;
+    body.className = "center"; // adding class to center this.
   }
-  
+  // this gets called on page load, need to disable this.
   function updateTime() {
     time--;
     timerEl.textContent = time;
@@ -59,27 +88,29 @@ var questions = [
   
   function renderQuestion() {
     
+    
+    for (var i = 0; i < choicesLenth; i++) {
+
+        var questionListItem = document.createElement("li");
+        questionListItem.textContent = choices[i];
+        //questionListItem.classList = "bg-primary text-purple";
+        optionListEl.append(questionListItem);
+      }
+    }
+    
     if (time == 0) {
       updateTime();
-      return;
+      //return;
     }
   
     intervalId = setInterval(updateTime, 1000);
     
-    questionEl.textContent = questions[questionIndex].question;
+    //bug - debbuger states "uncaught type error 'cannot set property 'textContent' of null"
+
   
-    optionListEl.innerHTML = "";
-    questionResultEl.innerHTML = "";
+
   
-    var choices = questions[questionIndex].choices;
-    var choicesLenth = choices.length;
-  
-    for (var i = 0; i < choicesLenth; i++) {
-      var questionListItem = document.createElement("li");
-      questionListItem.textContent = choices[i];
-      optionListEl.append(questionListItem);
-    }
-  }
+
   
   function nextQuestion() {
     questionIndex++;
@@ -96,6 +127,12 @@ var questions = [
       if (answer === questions[questionIndex].answer) {
         questionResultEl.textContent = "Correct";
         correctCount++;
+        questionEl.innerHTML = "";
+        optionListEl.innerHTML = "";
+        //main.innerHTML = clear(main);
+        nextQuestion();
+        console.log(questionIndex);
+
       } else {
         questionResultEl.textContent = "Incorrect";
         time = time - 2;
@@ -107,4 +144,6 @@ var questions = [
   
   renderQuestion();
   optionListEl.addEventListener("click", checkAnswer);
+  startQuizBtn.addEventListener("click", startQuiz);
+  console.log(startQuizBtn);
   

@@ -41,6 +41,16 @@ a {
 main p {
     font-size: 18px;
 }
+li {
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    font-size: 16px;
+    margin-bottom: 5px;
+    width: 30%;
+    display:block;
+    border-radius: 5px;
+    border: none; 
+}
 
 button {
     background-color: var(--secondary-color);
@@ -53,6 +63,10 @@ button {
 }
 
 button a {
+    color: var(--tertiary-color);
+    text-decoration: none;
+}
+button a:hover {
     color: var(--tertiary-color);
     text-decoration: none;
 }

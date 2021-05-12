@@ -12,11 +12,11 @@
     <header>
         <div>
         <a href="highscores.html">View Highscores</a>
-        <p class="timer" id="timer" >Time: <span>0</span></p>
+        <p class="timer" id="timer" >Time: <span id="timerTxt1">0</span></p>
         </div>
     </header>
-    <main class="center">
-        <div id="starquiz" class="row justify-content-center">
+    <main id="main" class="center">
+        <div id="startquiz" class="row justify-content-center">
             
             <div class="col-sm-8">    
             <h1> Coding Quiz Challenge</h1>
@@ -25,13 +25,15 @@
                 Try to answer the following code-related questions within the time limit.
                 Keep in mind that incorrect answer will penalize your score/Time by ten seconds!
             </p>
-        <button><a href="#">Start Quiz</a></button>
+        <button id="start-quiz">Start Quiz</button>
 
         </div>
     </div>
         <div id="questions" class="hide">
             <h2 id="question-title"></h2>
             <div id="choices"></div>
+            <div id="question-right-wrong"></div>
+
         </div>
         <div id="gameOver" class="hide">
 
