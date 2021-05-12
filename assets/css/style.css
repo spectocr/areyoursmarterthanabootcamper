@@ -24,6 +24,9 @@
   top: 0;
   z-index: 9999;
   }
+  .hide {
+      display: none;
+  }
 
 .center {
       text-align: center;
@@ -34,6 +37,9 @@
 }
 a {
     text-decoration: none;
+}
+main p {
+    font-size: 18px;
 }
 
 button {
