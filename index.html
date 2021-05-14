@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Coding Quiz - Are You Smarter Than a BootCamper?</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <title>Code Quiz</title>
 </head>
+
 <body>
-    <header>
-        <div>
-        <a href="highscores.html">View Highscores</a>
-        <p class="timer" id="timer" >Time: <span id="timerTxt1">0</span></p>
+    <a href="HighScores.html">View Highscores</a>
+    <!-- This is a wrapper -->
+    <div id="wrapper">
+        <!-- Div for timer -->
+        <div id="currentTime"></div>
+        <!-- Div for quiz content -->
+        <div id="questionsDiv">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answer will penalize your score/Time by ten seconds!</p>
+            <ul id="choicesUl"></ul>
+            <!-- Buttons -->
+            <button id="startTime">Start Quiz</button>
         </div>
-    </header>
-    <main id="main" class="center">
-        <div id="startquiz" class="row justify-content-center">
-            
-            <div class="col-sm-8">    
-            <h1> Coding Quiz Challenge</h1>
-        </br>
-            <p>
-                Try to answer the following code-related questions within the time limit.
-                Keep in mind that incorrect answer will penalize your score/Time by ten seconds!
-            </p>
-        <button id="start-quiz">Start Quiz</button>
 
-        </div>
     </div>
-        <div id="questions" class="hide">
-            <h2 id="question-title"></h2>
-            <div id="choices"></div>
-            <div id="question-right-wrong"></div>
-
-        </div>
-        <div id="gameOver" class="hide">
-
-        </div>
-
-    </main>
 
 
-    <script src="assets/js/script.js"></script>    
+    <script src="script.js"></script>
+
+
 </body>
+
 </html>
