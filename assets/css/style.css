@@ -10,6 +10,10 @@
     padding: 0;
     box-sizing: border-box;
   }
+  main {
+      text-align: center;
+  }
+
 
   header {
   padding: 10px 10px 60px 10px;
@@ -46,6 +50,7 @@ li {
     color: var(--tertiary-color);
     font-size: 16px;
     margin-bottom: 5px;
+    text-align: center;
     width: 30%;
     display:block;
     border-radius: 5px;
@@ -69,6 +74,14 @@ button a {
 button a:hover {
     color: var(--tertiary-color);
     text-decoration: none;
+}
+#question-right-wrong {
+    border-top: 2px solid grey;
+}
+#choices {
+    text-align: center;
+    padding: 0 auto 0 auto;
+    width: auto;
 }
 
 .highscores {

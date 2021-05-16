@@ -55,19 +55,17 @@ var questions = [
   var timerEl = document.querySelector("#timer");
   var startQuizBtn = document.querySelector("#start-quiz");
   var StartTimerTxt = document.querySelector("#timerTxt");
-  var choices = questions[questionIndex].choices;
-  var choicesLenth = choices.length;
   console.log(questionEl.textContent);
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
 
 
   var startQuiz = function() {
-    updateTime()
     hideStart.className = "hide";
     questionEl2.className = "";
     questionEl.innerHTML = questionEl.textContent
     console.log(questionIndex);
+    intervalId = setInterval(updateTime, 1000);
   };
 
   function endQuiz() {
@@ -75,12 +73,23 @@ var questions = [
     var body = document.body;
     body.innerHTML = "Game over, You scored " + correctCount;
     body.className = "center"; // adding class to center this.
+
+    //var br = document.body;
+    //br.body.createAttribute("br")
+    //br.body.append("</br>")
+
+    var hsName = document.createElement("input");
+    hsName.setAttribute("type", "text");
+    hsName.placeholder = "Type name here..";
+    hsName.textContent = "";
+    hsName.className = "highScoreNameEntry";
+    body.append(hsName);
+
   }
   // this gets called on page load, need to disable this.
   function updateTime() {
-    timerEl.textContent = time;
-    intervalId = setInterval(updateTime, 1000);
     time--;
+    timerEl.textContent = time;
     if (time <= 0) {
       endQuiz();
     }
@@ -88,10 +97,13 @@ var questions = [
   
   function renderQuestion() {
     questionEl.textContent = questions[questionIndex].question;
+    var choices = questions[questionIndex].choices;
+    var choicesLength = choices.length;
+  
 
     // empty choices div so that the following code will past the NEW choices. 
-    
-    for (var i = 0; i < choicesLenth; i++) {
+
+    for (var i = 0; i < choicesLength; i++) {
 
         var questionListItem = document.createElement("li");
         questionListItem.textContent = choices[i];
@@ -99,48 +111,42 @@ var questions = [
         optionListEl.append(questionListItem);
       }
     }
-    
-    // if (time == 0) {
-    //   updateTime();
-    //   //return;
-    // }
-  
-    
-    //bug - debbuger states "uncaught type error 'cannot set property 'textContent' of null"
-
-  
-
-  
 
   
   function nextQuestion() {
     questionIndex++;
     if (questionIndex === questions.length) {
-      time = 0;
+      endQuiz();
+      //time = 0;
     }
-    renderQuestion();
+
+    else {renderQuestion();
+    };
   }
   
   function checkAnswer(event) {
-    clearInterval(intervalId);
+    // clearInterval(intervalId);
     if (event.target.matches("li")) {
       var answer = event.target.textContent;
       if (answer === questions[questionIndex].answer) {
+        timerEl.textContent = time
         questionResultEl.textContent = "Correct";
         correctCount++;
         questionEl.innerHTML = "";
         optionListEl.innerHTML = "";
-        //main.innerHTML = clear(main);
+        //clear(optionListEl);
         nextQuestion();
-        console.log(questionIndex);
 
       } else {
         questionResultEl.textContent = "Incorrect";
-        time = time - 2;
+        time -= 5;
         timerEl.textContent = time;
+        questionEl.innerHTML = "";
+        optionListEl.innerHTML = "";
+        nextQuestion()
       }
     }
-    setTimeout(nextQuestion, 2000);
+   // setTimeout(nextQuestion, 2000);
   }
   
   renderQuestion();
