@@ -35,7 +35,7 @@ var questions = [
   var questionIndex = 0;
   var correctCount = 0;
   
-  var time = 7000;
+  var time = 60;
 
   var intervalId;
 
@@ -57,14 +57,13 @@ var questions = [
   var StartTimerTxt = document.querySelector("#timerTxt");
   var choices = questions[questionIndex].choices;
   var choicesLenth = choices.length;
-  questionEl.textContent = questions[questionIndex].question;
   console.log(questionEl.textContent);
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
 
 
   var startQuiz = function() {
-    time = 20;
+    updateTime()
     hideStart.className = "hide";
     questionEl2.className = "";
     questionEl.innerHTML = questionEl.textContent
@@ -79,15 +78,18 @@ var questions = [
   }
   // this gets called on page load, need to disable this.
   function updateTime() {
-    time--;
     timerEl.textContent = time;
+    intervalId = setInterval(updateTime, 1000);
+    time--;
     if (time <= 0) {
       endQuiz();
     }
   }
   
   function renderQuestion() {
-    
+    questionEl.textContent = questions[questionIndex].question;
+
+    // empty choices div so that the following code will past the NEW choices. 
     
     for (var i = 0; i < choicesLenth; i++) {
 
@@ -98,12 +100,11 @@ var questions = [
       }
     }
     
-    if (time == 0) {
-      updateTime();
-      //return;
-    }
+    // if (time == 0) {
+    //   updateTime();
+    //   //return;
+    // }
   
-    intervalId = setInterval(updateTime, 1000);
     
     //bug - debbuger states "uncaught type error 'cannot set property 'textContent' of null"
 
