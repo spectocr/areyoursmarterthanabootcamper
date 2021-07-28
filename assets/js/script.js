@@ -1,5 +1,6 @@
 //dom js and other scripting
 
+
 var questions = [
     {
       question: "Commonly used data types DO NOT include:",
@@ -36,6 +37,7 @@ var questions = [
   var correctCount = 0;
   
   var time = 60;
+  var highscores = [];
 
   var intervalId;
 
@@ -55,6 +57,8 @@ var questions = [
   var timerEl = document.querySelector("#timer");
   var startQuizBtn = document.querySelector("#start-quiz");
   var StartTimerTxt = document.querySelector("#timerTxt");
+  var submitHSButton = document.querySelector(".hsNameSubmit");
+  
   console.log(questionEl.textContent);
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
@@ -67,6 +71,16 @@ var questions = [
     console.log(questionIndex);
     intervalId = setInterval(updateTime, 1000);
   };
+
+  function submitHS() {
+    var hsNameText = document.querySelector(".highScoreNameEntry");
+    hSObj = {};
+    hSObj["Name"] = hsNameText.value;
+    hSObj["Score"] = correctCount;
+
+    highscores.push(hSObj);
+    localStorage.setItem("highScores", JSON.stringify(highscores));
+  }
 
   function endQuiz() {
     clearInterval(intervalId);
@@ -84,6 +98,21 @@ var questions = [
     hsName.textContent = "";
     hsName.className = "highScoreNameEntry";
     body.append(hsName);
+
+    var hsNameSubmit = document.createElement("button");
+    hsNameSubmit.textContent = "Submit";
+    hsNameSubmit.className = "highScoreButton";
+    hsNameSubmit.addEventListener("click", submitHS);
+  
+    body.append(hsNameSubmit);
+
+    var hsBackBtn = document.createElement("a");
+    hsBackBtn.textContent = "View High Scorces";
+    hsBackBtn.className = "highScoreButton";
+    hsBackBtn.setAttribute('href', './highscores.html');
+    //hsBackBtn.addEventListener("click", submitHS);
+  
+    body.append(hsBackBtn);
 
   }
   // this gets called on page load, need to disable this.
@@ -152,5 +181,6 @@ var questions = [
   renderQuestion();
   optionListEl.addEventListener("click", checkAnswer);
   startQuizBtn.addEventListener("click", startQuiz);
+  
   console.log(startQuizBtn);
   

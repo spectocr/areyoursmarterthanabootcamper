@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,31 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>High Scores</title>
 </head>
+
 <body class="highscores">
     <h1>Highscores</h1>
-    <!--TOOD list dynamic high scores list (stored in the DOM) here-->
+    <main>
+        <!--TOOD list dynamic high scores list (stored in the DOM) here-->
 
+
+    </main>
     <button><a href="index.html">Go Back</a></button>
     <button>Clear highscores</button>
-
-    
 </body>
+
+<script>
+    var grabMain = document.querySelector("main"); //grab main
+
+    var preHighScores = JSON.parse(window.localStorage.getItem('highScores'));
+
+    for (let i = 0; i < preHighScores.length; i++) {
+        var hsName = document.createElement("p");
+        hsName.setAttribute("type", "text");
+        hsName.textContent = preHighScores[i].Name + " " + preHighScores[i].Score;
+        console.log(preHighScores[i])
+        grabMain.append(hsName);
+
+    }
+</script>
+
 </html>
